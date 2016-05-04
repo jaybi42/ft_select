@@ -6,7 +6,7 @@
 #    By: jguthert <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/30 15:25:02 by jguthert          #+#    #+#              #
-#    Updated: 2016/05/03 15:35:53 by jguthert         ###   ########.fr        #
+#    Updated: 2016/05/04 12:19:12 by jguthert         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -43,6 +43,7 @@ OBJ = $(SRC:$(SRCPATH)/%.c=$(OBJPATH)/%.o)
 SRC = $(addprefix $(SRCPATH)/,$(SRCSFILES))
 
 SRCSFILES =				main.c			\
+						ft_select.c		\
 
 ##=-  Process -=##
 

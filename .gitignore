@@ -6,4 +6,5 @@
 *.cmx
 .#*
 *.dump
-ft_ls
+*.gch
+ft_select

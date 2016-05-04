@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/13 14:10:31 by jguthert          #+#    #+#             */
-/*   Updated: 2016/04/30 12:28:50 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/04 17:01:12 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,25 @@
 
 # define ERROR ft_error(__FILE__, __FUNCTION__, __LINE__)
 # define ERRORNO ft_errorno(__FILE__, __FUNCTION__, __LINE__)
-# define ABS(NBR) (((NBR) < 0) ? (-NBR) : (NBR))
+# define ABS(NBR) (((NBR) < 0) ? -(NBR) : (NBR))
 # define FTV_INIT(TYPE) ((t_ftv){NULL, 0, 0, sizeof(TYPE)})
+
+# define FTL_NODE	struct s_ftl_node
+# define FTL_NODEC	struct s_ftl_node const
+
+typedef struct		s_ftl_node
+{
+	FTL_NODE		*next;
+	FTL_NODE		*prev;
+}					t_ftl_node;
+
+typedef struct		s_ftl_root
+{
+	FTL_NODE		*next;
+	FTL_NODE		*prev;
+	int				nb_node;
+	size_t			size;
+}					t_ftl_root;
 
 typedef struct		s_list
 {
@@ -144,6 +161,7 @@ void				*ft_memchr(const void *s, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 void				*ft_memalloc(size_t size);
 void				ft_memdel(void **ap);
+void				*ft_memdup(void const *data, size_t size);
 
 /*
 **	##=-  Simple chained list  -=##
@@ -156,6 +174,16 @@ void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstadd_last(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+
+/*
+**	##=-  Double chained list looped  -=##
+*/
+
+t_ftl_root			ftl_uninit(void);
+void				ftl_init(t_ftl_root *l, size_t size);
+int					ftl_insert_pos(t_ftl_root *l, FTL_NODE *pos, FTL_NODEC *nod);
+int					ftl_push_front(t_ftl_root *l, FTL_NODEC *node);
+int					ftl_push_back(t_ftl_root *l, FTL_NODEC *node);
 
 /*
 **	##=-  Math  -=##

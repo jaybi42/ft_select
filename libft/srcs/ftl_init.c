@@ -1,39 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ftl_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/08 17:56:10 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/04 15:53:28 by jguthert         ###   ########.fr       */
+/*   Created: 2016/05/04 15:03:50 by jguthert          #+#    #+#             */
+/*   Updated: 2016/05/04 16:26:03 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_SELECT_H
-# define FT_SELECT_H
+#include "libft.h"
 
-/*
-** TODO: Suppr stdio
-*/
-
-# include <stdio.h> //
-
-# include "libft.h"
-
-typedef struct		s_elem
+void		ftl_init(t_ftl_root *l, size_t size)
 {
-	t_ftl_node		*list;
-	char			*name;
-	bool			selected;
-}					t_elem;
+	*l = (t_ftl_root){(t_ftl_node*)l, (t_ftl_node*)l, size, 0};
+	return ;
+}
 
-/*
-**Name: Do select
-**File: ft_select.c
-**Desc: Parse ft_select
-*/
-
-void				ft_select(char **av);
-
-#endif
+t_ftl_root	ftl_uninit(void)
+{
+	return ((t_ftl_root){NULL, NULL, 0, 0});
+}

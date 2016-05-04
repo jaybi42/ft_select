@@ -1,39 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_select.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/08 17:56:10 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/04 15:53:28 by jguthert         ###   ########.fr       */
+/*   Created: 2016/05/04 12:20:51 by jguthert          #+#    #+#             */
+/*   Updated: 2016/05/04 15:04:12 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_SELECT_H
-# define FT_SELECT_H
+#include "ft_select.h"
 
-/*
-** TODO: Suppr stdio
-*/
-
-# include <stdio.h> //
-
-# include "libft.h"
-
-typedef struct		s_elem
+void		ft_select(char **av)
 {
-	t_ftl_node		*list;
-	char			*name;
-	bool			selected;
-}					t_elem;
 
-/*
-**Name: Do select
-**File: ft_select.c
-**Desc: Parse ft_select
-*/
-
-void				ft_select(char **av);
-
-#endif
+	return ;
+}
