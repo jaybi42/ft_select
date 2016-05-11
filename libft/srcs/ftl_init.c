@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 15:03:50 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/11 16:12:58 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/11 18:15:48 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void		ftl_init(t_ftl_root *l, size_t node_size)
 {
 	*l = (t_ftl_root){(t_ftl_node*)l, (t_ftl_node*)l, 0, node_size};
-	return ;
 }
 
 t_ftl_root	ftl_uninit(void)

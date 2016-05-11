@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/08 17:56:10 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/04 15:53:28 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/11 18:02:29 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,15 @@ typedef struct		s_elem
 **Desc: Parse ft_select
 */
 
-void				ft_select(char **av);
+void				ft_select(char **av, int ac);
+
+/*
+**Name: List
+**File: mod_list.c
+**Desc: Parse list
+*/
+
+void				make_list(t_ftl_root *root, char **av, int ac);
+//void				free_list();
 
 #endif

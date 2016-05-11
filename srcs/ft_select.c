@@ -6,14 +6,32 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 12:20:51 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/04 15:04:12 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/11 18:40:31 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void		ft_select(char **av)
+static void		do_select(t_ftl_root *root)
 {
+	t_elem		*elem;
 
+	elem = NULL;
+	elem = (t_elem *)root->next;
+	while (elem != (t_elem *)root)
+	{
+		ft_putendl(elem->name);
+		elem = (t_elem *)elem->list->next;
+//		exit(0);
+	}
+}
+
+void			ft_select(char **av, int ac)
+{
+	t_ftl_root	root;
+
+	ftl_init(&root, sizeof(t_elem));
+	make_list(&root, av, ac);
+	do_select(&root);
 	return ;
 }
