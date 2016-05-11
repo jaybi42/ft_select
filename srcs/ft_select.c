@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 12:20:51 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/11 18:40:31 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/11 20:00:39 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@ static void		do_select(t_ftl_root *root)
 {
 	t_elem		*elem;
 
-	elem = NULL;
 	elem = (t_elem *)root->next;
 	while (elem != (t_elem *)root)
 	{
 		ft_putendl(elem->name);
-		elem = (t_elem *)elem->list->next;
-//		exit(0);
+		elem = (t_elem *)elem->node.next;
 	}
 }
 

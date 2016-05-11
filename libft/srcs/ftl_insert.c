@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 16:28:27 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/11 16:18:41 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/11 19:41:41 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int				ftl_push_back(t_ftl_root *l, FTL_NODEC *node)
 	l->size++;
 	return (0);
 }
+
+#include <stdio.h>
 
 int				ftl_push_front(t_ftl_root *l, FTL_NODEC *node)
 {
