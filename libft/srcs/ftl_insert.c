@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 16:28:27 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/04 17:02:18 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/11 16:10:50 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int				ftl_push_back(t_ftl_root *l, FTL_NODEC *node)
 {
 	t_ftl_node	*temp;
 
-	temp = ft_memdup(node, l->size);
+	temp = ft_memdup(node, l->node_size);
 	if (temp == NULL)
 		return (ENOMEM);
 	temp->next = l;
@@ -32,7 +32,7 @@ int				ftl_push_front(t_ftl_root *l, FTL_NODEC *node)
 {
 	t_ftl_node	*temp;
 
-	temp = ft_memdup(node, l->size);
+	temp = ft_memdup(node, l->node_size);
 	if (temp == NULL)
 		return (ENOMEM);
 	temp->next = l->next;
@@ -47,7 +47,7 @@ int				ftl_insert_pos(t_ftl_root *l, FTL_NODE *pos, FTL_NODEC *node)
 {
 	t_ftl_node	*temp;
 
-	temp = ft_memdup(node, l->size);
+	temp = ft_memdup(node, l->node_size);
 	if (temp == NULL)
 		return (ENOMEM);
 	temp->next = pos->next;

@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/13 14:10:31 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/04 18:23:28 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/11 16:10:30 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ typedef struct		s_ftl_root
 {
 	FTL_NODE		*next;
 	FTL_NODE		*prev;
-	int				nb_node;
 	size_t			size;
+	size_t			node_size;
 }					t_ftl_root;
 
 typedef struct		s_list
