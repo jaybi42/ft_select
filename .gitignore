@@ -7,4 +7,5 @@
 .#*
 *.dump
 *.gch
+.nfs*
 ft_select
