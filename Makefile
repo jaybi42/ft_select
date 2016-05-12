@@ -6,7 +6,7 @@
 #    By: jguthert <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/30 15:25:02 by jguthert          #+#    #+#              #
-#    Updated: 2016/05/11 17:57:12 by jguthert         ###   ########.fr        #
+#    Updated: 2016/05/12 16:28:03 by jguthert         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -32,7 +32,7 @@ INCLUDE_PATH = include/
 ##=-  Rules -=##
 
 LIBFT = -L $(LIBFT_PATH)
-LIBS = $(LIBFT) -lft
+LIBS = $(LIBFT) -lft -lncurses
 
 INCLUDES = -I./ -I $(LIBFT_PATH)/includes -I $(INCLUDE_PATH)
 
@@ -44,6 +44,7 @@ SRC = $(addprefix $(SRCPATH)/,$(SRCSFILES))
 
 SRCSFILES =				main.c			\
 						ft_select.c		\
+						print_error.c	\
 						mod_list.c		\
 
 ##=-  Process -=##
