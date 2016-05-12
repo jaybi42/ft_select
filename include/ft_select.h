@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/08 17:56:10 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/12 16:38:00 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/12 17:24:02 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include <stdio.h> //
 
 # include "libft.h"
+# include <termios.h>
+# include <term.h>
+# include <curses.h>
 
 # define TERM		struct termios
 
@@ -51,8 +54,8 @@ int					ft_select(char **av, int ac);
 **Desc: configure the terminal
 */
 
-int					init_term(TERM *termios);
-int					reset_term(TERM *termios);
+int					init_term(TERM *termios, TERM *termios_dfl);
+int					reset_term(TERM *termios_dfl);
 
 /*
 **Name: List

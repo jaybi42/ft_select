@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 16:38:33 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/12 17:00:42 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/12 17:21:28 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,14 @@
 ** }
 */
 
-int			reset_term(TERM *termios)
+int			reset_term(TERM *termios_dfl)
 {
-	termios->c_lflag &= ~(ICANON);
-	termios->c_lflag &= ~(ECHO);
-	termios->c_cc[VMIN] = 1;
-	termios->c_cc[TIME] = 0;
+	if (tcsetattr(0, TCSADRAIN, termios_dfl) == -1)
+		return (print_error("ft_select", 2));
 	return (0);
 }
 
-int			init_term(TERM *termios)
+int			init_term(TERM *termios, TERM *termios_dfl)
 {
 	char	*term;
 
@@ -47,11 +45,13 @@ int			init_term(TERM *termios)
 		return (print_error("ft_select", 0));
 	if (tgetent(NULL, term) != 1)
 		return (print_error("ft_select", 1));
+	if (tcgetattr(0, termios_dfl) == -1)
+		return (print_error("ft_select", 3));
 	termios->c_lflag &= ~(ICANON);
 	termios->c_lflag &= ~(ECHO);
 	termios->c_cc[VMIN] = 1;
-	termios->c_cc[TIME] = 0;
-	if (tcsetattr(0, TCSADRAIN, &term) == -1)
-		return (-1);
+	termios->c_cc[VTIME] = 0;
+	if (tcsetattr(0, TCSADRAIN, termios) == -1)
+		return (print_error("ft_select", 2));
 	return (0);
 }
