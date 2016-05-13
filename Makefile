@@ -6,7 +6,7 @@
 #    By: jguthert <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/30 15:25:02 by jguthert          #+#    #+#              #
-#    Updated: 2016/05/12 19:02:18 by jguthert         ###   ########.fr        #
+#    Updated: 2016/05/13 13:53:09 by jguthert         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -47,6 +47,7 @@ SRCSFILES =				main.c			\
 						print_error.c	\
 						mod_list.c		\
 						init_term.c		\
+						actions.c		\
 
 ##=-  Process -=##
 

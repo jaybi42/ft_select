@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/08 17:56:10 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/12 19:21:57 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/13 16:56:48 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include <term.h>
 # include <curses.h>
 
-//# define V(A,B,C,D) v[0] = A && v[1] = B && v[2] = C && v[3] = D && v[4] = '\0'
 # define TERM		struct termios
 
 typedef struct		s_elem
@@ -37,7 +36,7 @@ typedef struct		s_elem
 typedef struct		s_actions
 {
 	char			*action;
-	char			value[5];
+	int				value[4];
 	char			*key;
 }					t_actions;
 
@@ -55,6 +54,7 @@ typedef struct		s_error
 */
 
 int					ft_select(char **av, int ac);
+int					actions(char *buf);
 
 /*
 **Name: Terminal configuration
