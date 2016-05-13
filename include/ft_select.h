@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/08 17:56:10 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/13 16:56:48 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/13 17:55:02 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct		s_elem
 	t_ftl_node		node;
 	char			*name;
 	bool			selected;
+	bool			cursor;
 }					t_elem;
 
 typedef struct		s_actions
@@ -54,7 +55,7 @@ typedef struct		s_error
 */
 
 int					ft_select(char **av, int ac);
-int					actions(char *buf);
+int					actions(char *buf, t_ftl_root *root);
 
 /*
 **Name: Terminal configuration
@@ -64,6 +65,14 @@ int					actions(char *buf);
 
 int					init_term(TERM *termios, TERM *termios_dfl);
 int					reset_term(TERM *termios_dfl);
+
+/*
+**Name: Print
+**File: print_term.c
+**Desc: Print ft_select
+*/
+
+void				print_select(t_ftl_root *root);
 
 /*
 **Name: List
