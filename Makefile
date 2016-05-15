@@ -6,7 +6,7 @@
 #    By: jguthert <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/30 15:25:02 by jguthert          #+#    #+#              #
-#    Updated: 2016/05/13 13:53:09 by jguthert         ###   ########.fr        #
+#    Updated: 2016/05/15 15:03:47 by jguthert         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -45,9 +45,12 @@ SRC = $(addprefix $(SRCPATH)/,$(SRCSFILES))
 SRCSFILES =				main.c			\
 						ft_select.c		\
 						print_error.c	\
-						mod_list.c		\
+						init_list.c		\
 						init_term.c		\
 						actions.c		\
+						arrow_actions.c	\
+						mod_actions.c	\
+						print_select.c	\
 
 ##=-  Process -=##
 

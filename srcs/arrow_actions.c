@@ -1,26 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mod_list.c                                         :+:      :+:    :+:   */
+/*   arrow_actions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/11 17:54:18 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/13 17:35:43 by jguthert         ###   ########.fr       */
+/*   Created: 2016/05/15 14:43:55 by jguthert          #+#    #+#             */
+/*   Updated: 2016/05/15 15:05:14 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void		make_list(t_ftl_root *root, char **av, int ac)
+void		up_list(t_ftl_root *root, t_ftl_node *pos)
 {
-	t_elem	elem;
+	pos->cursor = 0
+	pos = pos->prev;
+	if (pos == root)
+		pos = pos->prev;
+	pos->cursor = 1
+}
 
-	while (--ac > 0)
-	{
-		elem.name = av[ac];
-		elem.selected = 0;
-		elem.cursor = 0;
-		ftl_push_front(root, (FTL_NODE *)(&elem));
-	}
+void		down_list(t_ftl_root *root, t_ftl_node *pos)
+{
+	pos->cursor = 0
+	pos = pos->next;
+	if (pos == root)
+		pos = pos->next;
+	pos->cursor = 1
+}
+
+void		right_list(t_ftl_root *root, t_ftl_node *pos)
+{
+	return ;
+}
+
+void		left_list(t_ftl_root *root, t_ftl_node *pos)
+{
+	return ;
 }

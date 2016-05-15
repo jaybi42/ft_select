@@ -6,29 +6,22 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 13:49:16 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/13 17:45:45 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/15 14:51:49 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 #include <unistd.h>
 
-static t_actions const	g_actions[4] = {
-	{"cl", {27, 91, 65, 0}, "UP"},
-	{"cl", {27, 91, 66, 0}, "DOWN"},
-	{"cl", {27, 91, 67, 0}, "RIGHT"},
-	{"cl", {27, 91, 68, 0}, "LEFT"},
-	{"cl", {27, 91, 51, 0}, "BACKSPACE"},
-	{"cl", {127, 0, 0, 0}, "DELETE"},
-	{"cl", {32, 0, 0, 0}, "SPACEBAR"},
-	{"cl", {27, 68, 0, 0}, "ENTER"},
+static t_actions const	g_actions[7] = {
+	{up_action, {27, 91, 65, 0}, "UP"},
+	{down_action, {27, 91, 66, 0}, "DOWN"},
+	{right_action, {27, 91, 67, 0}, "RIGHT"},
+	{left_action, {27, 91, 68, 0}, "LEFT"},
+	{del_action, {27, 91, 51, 0}, "BACKSPACE"},
+	{del_action, {127, 0, 0, 0}, "DELETE"},
+	{sel_action, {32, 0, 0, 0}, "SPACEBAR"},
 };
-
-static int		int_putchar(int c)
-{
-	write(1, &c, 1);
-	return (0);
-}
 
 static int		cmp_buf(int *value, char *buf)
 {
@@ -44,22 +37,17 @@ static int		cmp_buf(int *value, char *buf)
 	return (0);
 }
 
-int				actions(char *buf)
+int				actions(char *buf, t_ftl_root *root, t_ftl_node *pos)
 {
 	char		*ret;
 	int			i;
 
 	i = 0;
-	while (i < 4)
+	while (i < 7)
 	{
 		if (cmp_buf((int *)g_actions[i].value, buf) == 0)
 		{
-			if ((ret = tgetstr("cl", NULL)) == NULL)
-				return (print_error("ft_select", 4));
-			tputs(ret, 0, int_putchar);
-			if ((ret = tgetstr(g_actions[i].action, NULL)) == NULL)
-				return (print_error("ft_select", 4));
-			tputs(ret, 0, int_putchar);
+			g_actions[i].action(root, pos);
 			return (0);
 		}
 		i++;

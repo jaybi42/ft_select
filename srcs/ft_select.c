@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 12:20:51 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/13 17:53:30 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/15 14:43:31 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 static int		do_select(t_ftl_root *root)
 {
 	char		buf[5];
+	int			pos;
 
+	pos = 0;
 	while (1)
 	{
 		ft_bzero(&buf, 5);
@@ -24,7 +26,7 @@ static int		do_select(t_ftl_root *root)
 			return (1);
 		if (buf[0] == 27 && buf[1] == 0)
 			return (0);
-		if (actions(buf, root) == 1)
+		if (actions(buf, root, &p) == 1)
 			return (1);
 		print_select(root);
 	}
@@ -40,8 +42,7 @@ int				ft_select(char **av, int ac)
 	make_list(&root, av, ac);
 	if (init_term(&termios, &termios_dfl) == 1)
 		return (1);
-	int	ret;
-	ret = do_select(&root);
+	do_select(&root);
 	reset_term(&termios_dfl);
 	return(0);
 }

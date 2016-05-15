@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/08 17:56:10 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/13 17:55:02 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/15 14:51:31 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ typedef struct		s_elem
 	bool			cursor;
 }					t_elem;
 
+typedef void		(*modl_t) (t_ftl_root *root, t_ftl_node *pos);
+
 typedef struct		s_actions
 {
-	char			*action;
+	modl_t			*action;
 	int				value[4];
 	char			*key;
 }					t_actions;
@@ -55,7 +57,20 @@ typedef struct		s_error
 */
 
 int					ft_select(char **av, int ac);
-int					actions(char *buf, t_ftl_root *root);
+
+/*
+**Name: actions
+**File: arrow_actions.c mod_actions.c
+**Desc: actions fonctions
+*/
+
+int					actions(char *buf, t_ftl_root *root, t_ftl_node *pos);
+void				up_action(t_ftl_root *root, t_ftl_node *pos);
+void				down_action(t_ftl_root *root, t_ftl_node *pos);
+void				right_action(t_ftl_root *root, t_ftl_node *pos);
+void				left_action(t_ftl_root *root, t_ftl_node *pos);
+void				del_action(t_ftl_root *root, t_ftl_node *pos);
+void				sel_action(t_ftl_root *root, t_ftl_node *pos);
 
 /*
 **Name: Terminal configuration
