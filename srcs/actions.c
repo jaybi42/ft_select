@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 13:49:16 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/15 14:51:49 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/15 17:01:33 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,8 @@ static int		cmp_buf(int *value, char *buf)
 	return (0);
 }
 
-int				actions(char *buf, t_ftl_root *root, t_ftl_node *pos)
+int				actions(char *buf, t_ftl_root *root, t_ftl_node **pos)
 {
-	char		*ret;
 	int			i;
 
 	i = 0;

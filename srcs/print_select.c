@@ -6,18 +6,12 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 17:50:04 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/15 14:30:15 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/15 16:13:20 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 #include <unistd.h>
-
-static int		int_putchar(int c)
-{
-	write(1, &c, 1);
-	return (0);
-}
 
 static int		reset_select(void)
 {
@@ -29,26 +23,37 @@ static int		reset_select(void)
 	return (0);
 }
 
-static int		print_it(void)
+static void		print_selected(char *name, bool cursor)
+{
+	return ;
+}
+
+static void		print_normal(char *name, bool cursor)
 {
 	char		*ret;
 
-	if ((ret = tgetstr("da", NULL)) == NULL)
-		return (print_error("ft_select", 4));
-	tputs(ret, 0, int_putchar);
-	return (0);
+	if (cursor == 1)
+	{
+		return ;
+//		ft_putendl_fd(name, 2);
+	}
+	else
+		return ;
+//		ft_putendl_fd(name, 2);
 }
 
 void			print_select(t_ftl_root *root)
 {
-	t_elem		*elem;
+	t_ftl_node	*node;
 
 	reset_select();
-	print_it();
-	elem = (t_elem *)root->next;
-	while (elem != (t_elem *)root)
+	node = (t_ftl_node *)root->next;
+	while (node != (t_ftl_node *)root)
 	{
-		ft_putendl(elem->name);
-		elem = (t_elem *)elem->node.next;
+		if (((t_elem *)node)->selected == 1)
+			print_selected(((t_elem *)node)->name, ((t_elem *)node)->cursor);
+		else
+			print_normal(((t_elem *)node)->name, ((t_elem *)node)->cursor);
+		node = node->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 17:54:18 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/15 15:03:02 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/15 15:10:30 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void		init_list(t_ftl_root *root, char **av, int ac)
 {
 	t_elem	elem;
 
-	ft_bzero(elem, (sizeof(t_elem)));
+	ft_bzero(&elem, (sizeof(t_elem)));
 	while (--ac > 1)
 	{
 		elem.name = av[ac];

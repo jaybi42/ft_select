@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/08 17:56:10 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/15 14:51:31 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/15 17:05:11 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ typedef struct		s_elem
 	bool			cursor;
 }					t_elem;
 
-typedef void		(*modl_t) (t_ftl_root *root, t_ftl_node *pos);
+typedef void		(*modl_t) (t_ftl_root *root, t_ftl_node **pos);
 
 typedef struct		s_actions
 {
-	modl_t			*action;
+	modl_t			action;
 	int				value[4];
 	char			*key;
 }					t_actions;
@@ -64,13 +64,13 @@ int					ft_select(char **av, int ac);
 **Desc: actions fonctions
 */
 
-int					actions(char *buf, t_ftl_root *root, t_ftl_node *pos);
-void				up_action(t_ftl_root *root, t_ftl_node *pos);
-void				down_action(t_ftl_root *root, t_ftl_node *pos);
-void				right_action(t_ftl_root *root, t_ftl_node *pos);
-void				left_action(t_ftl_root *root, t_ftl_node *pos);
-void				del_action(t_ftl_root *root, t_ftl_node *pos);
-void				sel_action(t_ftl_root *root, t_ftl_node *pos);
+int					actions(char *buf, t_ftl_root *root, t_ftl_node **pos);
+void				up_action(t_ftl_root *root, t_ftl_node **pos);
+void				down_action(t_ftl_root *root, t_ftl_node **pos);
+void				right_action(t_ftl_root *root, t_ftl_node **pos);
+void				left_action(t_ftl_root *root, t_ftl_node **pos);
+void				del_action(t_ftl_root *root, t_ftl_node **pos);
+void				sel_action(t_ftl_root *root, t_ftl_node **pos);
 
 /*
 **Name: Terminal configuration
@@ -83,11 +83,12 @@ int					reset_term(TERM *termios_dfl);
 
 /*
 **Name: Print
-**File: print_term.c
+**File: print_term.c int_putchar.c
 **Desc: Print ft_select
 */
 
 void				print_select(t_ftl_root *root);
+int					int_putchar(int c);
 
 /*
 **Name: List
@@ -95,8 +96,7 @@ void				print_select(t_ftl_root *root);
 **Desc: Parse list
 */
 
-void				make_list(t_ftl_root *root, char **av, int ac);
-//void				free_list();
+void				init_list(t_ftl_root *root, char **av, int ac);
 
 /*
 **Name: Error

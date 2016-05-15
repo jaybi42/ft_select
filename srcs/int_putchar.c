@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mod_actions.c                                      :+:      :+:    :+:   */
+/*   int_putchar.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/15 14:52:22 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/15 17:20:42 by jguthert         ###   ########.fr       */
+/*   Created: 2016/05/15 15:40:49 by jguthert          #+#    #+#             */
+/*   Updated: 2016/05/15 15:41:34 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
+#include <unistd.h>
 
-void			del_action(t_ftl_root *root, t_ftl_node **pos)
+int			int_putchar(int c)
 {
-	t_ftl_node	*node;
-
-	node = (*pos)->next;
-	ftl_erase_pos(root, *pos, NULL);
-	*pos = node;
-	if (*pos == (t_ftl_node *)root)
-		*pos = (*pos)->next;
-	((t_elem *)*pos)->cursor = 1;
-}
-
-void		sel_action(t_ftl_root *root, t_ftl_node **pos)
-{
-	(void)root;
-	((t_elem *)*pos)->selected = !(((t_elem *)*pos)->selected);
+	write(2, &c, 1);
+	return (0);
 }
