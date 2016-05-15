@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 12:20:51 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/15 17:58:31 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/15 18:16:08 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static int		do_select(t_ftl_root *root)
 	pos = root->next;
 	while (1)
 	{
+		print_select(root);
 		ft_bzero(&buf, 5);
 		if (read(0, buf, 5) == -1)
 			return (1);
@@ -50,7 +51,6 @@ static int		do_select(t_ftl_root *root)
 			return (1);
 		if (pos == (t_ftl_node *)root)
 			return (0);
-		print_select(root);
 //		print_list(root, pos);
 	}
 }
