@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/08 17:56:10 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/16 20:03:01 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/16 21:09:15 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct		s_elem
 	t_ftl_node		node;
 	char			*name;
 	int				name_len;
+	int				pos;
 	bool			selected;
 	bool			cursor;
 }					t_elem;

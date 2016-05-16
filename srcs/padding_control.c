@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 18:11:42 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/16 20:08:41 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/16 21:36:34 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,18 @@ static int          move_termcap(char *key, int col, int row)
     return (0);
 }
 
-static int			get_maxlen(t_ftl_root *root, t_ftl_node *check_node, int *p)
+static int			get_maxlen(t_ftl_root *root)
 {
 	t_ftl_node		*node;
 	int				max_len;
-	int				i;
 
 	max_len = 0;
-	i = 1;
 	node = root->next;
 	while (node != (t_ftl_node *)root)
 	{
 		if (((t_elem *)node)->name_len > max_len)
 			max_len = ((t_elem *)node)->name_len;
-		if (check_node == node)
-			*p = i;
 		node = node->next;
-		i++;
 	}
 	return (max_len);
 }
@@ -52,14 +47,13 @@ int					padding_control(t_ftl_root *root, t_ftl_node *node)
 	int				col;
 	int				row;
 	int				max_len;
-	int				pos;
 
 	ioctl(0, TIOCGWINSZ, &win);
-	max_len = get_maxlen(root, node, &pos) + 5;
+	max_len = get_maxlen(root) + 5;
 	if (((win.ws_col / max_len) * win.ws_row) < (int)root->size)
 		return (1);
-	col = pos / win.ws_row * max_len;
-	row = pos % win.ws_row;
+	col = ((t_elem *)node)->pos / win.ws_row * max_len;
+	row = ((t_elem *)node)->pos % win.ws_row;
 	move_termcap("cm", col, row);
 	return (0);
 }

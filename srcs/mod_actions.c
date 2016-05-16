@@ -6,11 +6,20 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 14:52:22 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/15 17:37:17 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/16 21:14:38 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
+
+static void		realloc_pos(t_ftl_root *root, t_ftl_node *pos)
+{
+	while (pos != (t_ftl_node *)root)
+	{
+		((t_elem *)pos)->pos--;
+		pos = pos->next;
+	}
+}
 
 void			del_action(t_ftl_root *root, t_ftl_node **pos)
 {
@@ -22,6 +31,7 @@ void			del_action(t_ftl_root *root, t_ftl_node **pos)
 	if (*pos == (t_ftl_node *)root)
 		*pos = (*pos)->next;
 	((t_elem *)*pos)->cursor = 1;
+	realloc_pos(root, *pos);
 }
 
 void		sel_action(t_ftl_root *root, t_ftl_node **pos)
@@ -35,5 +45,4 @@ void		sel_action(t_ftl_root *root, t_ftl_node **pos)
 			*pos = (*pos)->next;
 		((t_elem *)*pos)->cursor = 1;
 	}
-
 }

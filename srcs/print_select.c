@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 17:50:04 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/16 19:59:41 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/16 20:50:04 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ static int			do_termcap(char *key)
 	tputs(ret, 0, int_putchar);
 	return (0);
 }
+
+static int			error_size(void)
+{
+	do_termcap("cl");
+	ft_putstr_fd("ft_select : TOO SMALL windows size.", 2);
+	return (1);
+}
+
 
 static int			print_selected(char *name, bool cursor)
 {
@@ -66,7 +74,7 @@ int					print_select(t_ftl_root *root)
 	while (node != (t_ftl_node *)root)
 	{
 		if (padding_control(root, node) == 1)
-			return (1);
+			return (error_size());
 		if (((t_elem *)node)->selected == 1)
 			print_selected(((t_elem *)node)->name, ((t_elem *)node)->cursor);
 		else

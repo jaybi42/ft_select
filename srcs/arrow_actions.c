@@ -6,11 +6,30 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 14:43:55 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/15 17:09:48 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/16 22:01:02 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
+#include <sys/ioctl.h>
+
+static int	get_newpos(int	pos, int size, int sign)
+{
+    struct winsize  win;
+	int		new_pos;
+
+    ioctl(0, TIOCGWINSZ, &win);
+	if (size < win.ws_row)
+		return (pos);
+	new_pos = pos + (win.ws_row) * sign;
+	if (new_pos < 0)
+		new_pos = (new_pos + size) + size % win.ws_row;
+	else if (new_pos > size)
+		new_pos %= win.ws_row;
+	if (new_pos > size)
+		return (pos);
+	return (new_pos--);
+}
 
 void		up_action(t_ftl_root *root, t_ftl_node **pos)
 {
@@ -32,14 +51,32 @@ void		down_action(t_ftl_root *root, t_ftl_node **pos)
 
 void		right_action(t_ftl_root *root, t_ftl_node **pos)
 {
-	(void)root;
-	(void)pos;
-	return ;
+	int		new_pos;
+
+	new_pos = get_newpos(((t_elem *)*pos)->pos, (int)root->size, 1);
+	((t_elem *)*pos)->cursor = 0;
+	while (new_pos != ((t_elem *)*pos)->pos)
+	{
+		if (new_pos > ((t_elem *)*pos)->pos)
+			*pos = (*pos)->next;
+		else
+			*pos = (*pos)->prev;
+	}
+	((t_elem *)*pos)->cursor = 1;
 }
 
 void		left_action(t_ftl_root *root, t_ftl_node **pos)
 {
-	(void)root;
-	(void)pos;
-	return ;
+	int		new_pos;
+
+	new_pos = get_newpos(((t_elem *)*pos)->pos, (int)root->size, -1);
+	((t_elem *)*pos)->cursor = 0;
+	while (new_pos != ((t_elem *)*pos)->pos)
+	{
+		if (new_pos > ((t_elem *)*pos)->pos)
+			*pos = (*pos)->next;
+		else
+			*pos = (*pos)->prev;
+	}
+	((t_elem *)*pos)->cursor = 1;
 }
