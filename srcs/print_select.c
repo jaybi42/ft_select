@@ -6,12 +6,23 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 17:50:04 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/15 18:23:19 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/16 14:27:21 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 #include <unistd.h>
+
+static int		move_termcap(char *key, int col, int row)
+{
+	char		*ret;
+
+	if ((ret = tgetstr(key, NULL)) == NULL)
+		return (print_error("ft_select", 4));
+	ret = tgoto(ret, col, row);
+	tputs(ret, 0, int_putchar);
+	return (0);
+}
 
 static int		do_termcap(char *key)
 {
@@ -56,6 +67,7 @@ void			print_select(t_ftl_root *root)
 	node = (t_ftl_node *)root->next;
 	while (node != (t_ftl_node *)root)
 	{
+		move_termcap("ch", 0, 0);
 		if (((t_elem *)node)->selected == 1)
 			print_selected(((t_elem *)node)->name, ((t_elem *)node)->cursor);
 		else

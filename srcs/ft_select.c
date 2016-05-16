@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 12:20:51 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/15 18:16:08 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/16 13:51:32 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static int		do_select(t_ftl_root *root)
 			return (1);
 		if (pos == (t_ftl_node *)root)
 			return (0);
-//		print_list(root, pos);
 	}
 }
 

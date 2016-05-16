@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 16:38:33 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/12 19:03:00 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/16 14:13:00 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <termios.h>
 #include <term.h>
 #include <curses.h>
+#include <unistd.h>
 
 /*
 ** TERMIOS STRUCT
@@ -31,14 +32,23 @@
 
 int			reset_term(TERM *termios_dfl)
 {
+	char	*ret;
+
+	if ((ret = tgetstr("ve", NULL)) == NULL)
+		return (print_error("ft_select", 4));
+	tputs(ret, 0, int_putchar);
 	if (tcsetattr(0, TCSADRAIN, termios_dfl) == -1)
 		return (print_error("ft_select", 2));
+	if ((ret = tgetstr("cl", NULL)) == NULL)
+		return (print_error("ft_select", 4));
+	tputs(ret, 0, int_putchar);
 	return (0);
 }
 
 int			init_term(TERM *termios, TERM *termios_dfl)
 {
 	char	*term;
+	char	*ret;
 
 	term = getenv("TERM");
 	if (term == NULL)
@@ -51,6 +61,9 @@ int			init_term(TERM *termios, TERM *termios_dfl)
 	termios->c_lflag &= ~(ECHO);
 	termios->c_cc[VMIN] = 1;
 	termios->c_cc[VTIME] = 0;
+	if ((ret = tgetstr("vi", NULL)) == NULL)
+		return (print_error("ft_select", 4));
+	tputs(ret, 0, int_putchar);
 	if (tcsetattr(0, TCSADRAIN, termios) == -1)
 		return (print_error("ft_select", 2));
 	return (0);
