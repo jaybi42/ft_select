@@ -6,30 +6,12 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 12:20:51 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/16 13:51:32 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/16 18:52:36 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 #include <unistd.h>
-
-static void		print_list(t_ftl_root *root, t_ftl_node *pos)
-{
-	t_ftl_node	*node;
-
-	node = root->next;
-	while (node != (t_ftl_node *)root)
-	{
-		ft_putendl_fd(((t_elem *)node)->name, 2);
-		ft_putnbr_fd(((t_elem *)node)->selected, 2);
-		ft_putchar_fd('\n', 2);
-		ft_putnbr_fd(((t_elem *)node)->cursor, 2);
-		ft_putchar_fd('\n', 2);
-//		ft_putstr_fd("-----------------", 2);
-		node = node->next;
-	}
-	ft_putendl_fd(((t_elem *)pos)->name, 2);
-}
 
 static int		do_select(t_ftl_root *root)
 {
@@ -39,13 +21,14 @@ static int		do_select(t_ftl_root *root)
 	pos = root->next;
 	while (1)
 	{
-		print_select(root);
+		if (print_select(root) == 1)
+			return (-1);
 		ft_bzero(&buf, 5);
 		if (read(0, buf, 5) == -1)
 			return (1);
 		if (buf[0] == 27 && buf[1] == 0)
 			return (0);
-		if (buf[0] == 10 && buf[1] == 0)
+		if (buf[0] == '\n' && buf[1] == 0)
 			return (0);
 		if (actions(buf, root, &pos) == 1)
 			return (1);
@@ -59,12 +42,17 @@ int				ft_select(char **av, int ac)
 	t_ftl_root	root;
 	TERM		termios;
 	TERM		termios_dfl;
+	int			ret;
 
 	ftl_init(&root, sizeof(t_elem));
-	init_list(&root, av, ac);
+	if (init_list(&root, av, ac) == 1)
+		return (print_error("ft_select", 6));
 	if (init_term(&termios, &termios_dfl) == 1)
 		return (1);
-	do_select(&root);
+	catch_sig(&root, &termios, &termios_dfl);
+	ret = do_select(&root);
 	reset_term(&termios_dfl);
+	if (ret == -1)
+		return (print_error("ft_select", 5));
 	return(0);
 }

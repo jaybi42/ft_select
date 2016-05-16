@@ -6,13 +6,13 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 17:54:18 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/15 15:10:30 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/16 20:02:56 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void		init_list(t_ftl_root *root, char **av, int ac)
+int			init_list(t_ftl_root *root, char **av, int ac)
 {
 	t_elem	elem;
 
@@ -20,9 +20,14 @@ void		init_list(t_ftl_root *root, char **av, int ac)
 	while (--ac > 1)
 	{
 		elem.name = av[ac];
-		ftl_push_front(root, (FTL_NODE *)(&elem));
+		elem.name_len = ft_strlen(elem.name);
+		if (ftl_push_front(root, (FTL_NODE *)(&elem)) != 0)
+			return (1);
 	}
 	elem.name = av[ac];
 	elem.cursor = 1;
-	ftl_push_front(root, (FTL_NODE *)(&elem));
+	elem.name_len = ft_strlen(elem.name);
+	if (ftl_push_front(root, (FTL_NODE *)(&elem)) != 0)
+		return (1);
+	return (0);
 }

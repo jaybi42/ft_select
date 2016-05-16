@@ -6,7 +6,7 @@
 #    By: jguthert <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/30 15:25:02 by jguthert          #+#    #+#              #
-#    Updated: 2016/05/15 15:42:20 by jguthert         ###   ########.fr        #
+#    Updated: 2016/05/16 18:25:12 by jguthert         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -52,6 +52,8 @@ SRCSFILES =				main.c			\
 						mod_actions.c	\
 						print_select.c	\
 						int_putchar.c	\
+						catch_sig.c		\
+						padding_control.c	\
 
 ##=-  Process -=##
 

@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/08 17:56:10 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/15 17:05:11 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/16 20:03:01 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,22 @@
 
 # define TERM		struct termios
 
+# define H_RED		"\033[1;91m"
+# define H_BLUE		"\033[1;94m"
+# define END		"\033[0m"
+
+typedef struct		s_sig
+{
+	t_ftl_root		*root;
+	TERM			*term;
+	TERM			*term_dfl;
+}					t_sig;
+
 typedef struct		s_elem
 {
 	t_ftl_node		node;
 	char			*name;
+	int				name_len;
 	bool			selected;
 	bool			cursor;
 }					t_elem;
@@ -83,12 +95,13 @@ int					reset_term(TERM *termios_dfl);
 
 /*
 **Name: Print
-**File: print_term.c int_putchar.c
+**File: print_term.c int_putchar.c padding_control,.c
 **Desc: Print ft_select
 */
 
-void				print_select(t_ftl_root *root);
+int					print_select(t_ftl_root *root);
 int					int_putchar(int c);
+int					padding_control(t_ftl_root *root, t_ftl_node *node);
 
 /*
 **Name: List
@@ -96,7 +109,7 @@ int					int_putchar(int c);
 **Desc: Parse list
 */
 
-void				init_list(t_ftl_root *root, char **av, int ac);
+int					init_list(t_ftl_root *root, char **av, int ac);
 
 /*
 **Name: Error
@@ -105,5 +118,13 @@ void				init_list(t_ftl_root *root, char **av, int ac);
 */
 
 int					print_error(char *cmd, int error);
+
+/*
+**Name: Error
+**File: print_error.c
+**Desc: Parce error
+*/
+
+void				catch_sig(t_ftl_root *root, TERM *term, TERM *term_dfl);
 
 #endif
