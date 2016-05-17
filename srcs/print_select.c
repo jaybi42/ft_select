@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 17:50:04 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/16 20:50:04 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/17 14:50:13 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,15 @@ static int			print_selected(char *name, bool cursor)
 	return (0);
 }
 
-static int			print_normal(char *name, bool cursor)
+static int			print_normal(char *name, bool cursor, int pos)
 {
 	if (cursor == 1)
 	{
 		ft_putstr_fd(H_RED, 2);
 		do_termcap("us");
-		ft_putendl_fd(name, 2);
+		ft_putstr_fd(name, 2);
+		ft_putnbr_fd(pos, 2);
+		ft_putchar_fd(pos, 2);
 		do_termcap("ue");
 		ft_putstr_fd(END, 2);
 	}
@@ -78,7 +80,7 @@ int					print_select(t_ftl_root *root)
 		if (((t_elem *)node)->selected == 1)
 			print_selected(((t_elem *)node)->name, ((t_elem *)node)->cursor);
 		else
-			print_normal(((t_elem *)node)->name, ((t_elem *)node)->cursor);
+			print_normal(((t_elem *)node)->name, ((t_elem *)node)->cursor, ((t_elem *)node)->pos);
 		node = node->next;
 	}
 	return (0);
