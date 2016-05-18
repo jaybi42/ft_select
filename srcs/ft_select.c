@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 12:20:51 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/17 15:12:17 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/17 15:15:53 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,14 @@ static int		do_select(t_ftl_root *root)
 			return (0);
 		if (buf[0] == 10 && buf[1] == 0)
 			return (2);
+/*		ft_putnbr_fd(buf[0], 2);
+		ft_putchar_fd(' ', 2);
+		ft_putnbr_fd(buf[1], 2);
+		ft_putchar_fd(' ', 2);
+		ft_putnbr_fd(buf[2], 2);
+		ft_putchar_fd(' ', 2);
+		ft_putnbr_fd(buf[3], 2);
+		ft_putchar_fd('\n', 2);*/
 		if (actions(buf, root, &pos) == 1)
 			return (1);
 		if (pos == (t_ftl_node *)root)
