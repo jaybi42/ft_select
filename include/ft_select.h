@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/08 17:56:10 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/16 21:09:15 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/18 13:26:15 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@
 typedef struct		s_sig
 {
 	t_ftl_root		*root;
-	TERM			*term;
-	TERM			*term_dfl;
 }					t_sig;
 
 typedef struct		s_elem
@@ -91,18 +89,19 @@ void				sel_action(t_ftl_root *root, t_ftl_node **pos);
 **Desc: configure the terminal
 */
 
-int					init_term(TERM *termios, TERM *termios_dfl);
-int					reset_term(TERM *termios_dfl);
+int					init_term(void);
+int					reset_term(void);
 
 /*
 **Name: Print
-**File: print_term.c int_putchar.c padding_control,.c
+**File: print_term.c int_putchar.c padding_control.c do_termcap.c
 **Desc: Print ft_select
 */
 
 int					print_select(t_ftl_root *root);
 int					int_putchar(int c);
 int					padding_control(t_ftl_root *root, t_ftl_node *node);
+int					do_termcap(char *key);
 
 /*
 **Name: List
@@ -121,11 +120,11 @@ int					init_list(t_ftl_root *root, char **av, int ac);
 int					print_error(char *cmd, int error);
 
 /*
-**Name: Error
-**File: print_error.c
-**Desc: Parce error
+**Name: Signals
+**File: catch_sig.c
+**Desc: catch the signals
 */
 
-void				catch_sig(t_ftl_root *root, TERM *term, TERM *term_dfl);
+void				catch_sig(t_ftl_root *root);
 
 #endif

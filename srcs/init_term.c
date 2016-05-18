@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 16:38:33 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/16 14:13:00 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/18 13:26:32 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,41 +30,38 @@
 ** }
 */
 
-int			reset_term(TERM *termios_dfl)
+int			reset_term(void)
 {
-	char	*ret;
+	TERM	term;
 
-	if ((ret = tgetstr("ve", NULL)) == NULL)
-		return (print_error("ft_select", 4));
-	tputs(ret, 0, int_putchar);
-	if (tcsetattr(0, TCSADRAIN, termios_dfl) == -1)
+	if (do_termcap("cl") == 1 || do_termcap("ve") == 1)
+		return (1);
+	if (tcgetattr(0, &term) == -1)
+		return (print_error("ft_select", 3));
+	if (tcsetattr(0, 0, &term) == -1)
 		return (print_error("ft_select", 2));
-	if ((ret = tgetstr("cl", NULL)) == NULL)
-		return (print_error("ft_select", 4));
-	tputs(ret, 0, int_putchar);
 	return (0);
 }
 
-int			init_term(TERM *termios, TERM *termios_dfl)
+int			init_term(void)
 {
-	char	*term;
-	char	*ret;
+	char	*term_name;
+	TERM	term;
 
-	term = getenv("TERM");
-	if (term == NULL)
+	term_name = getenv("TERM");
+	if (term_name == NULL)
 		return (print_error("ft_select", 0));
-	if (tgetent(NULL, term) != 1)
+	if (tgetent(NULL, term_name) != 1)
 		return (print_error("ft_select", 1));
-	if (tcgetattr(0, termios_dfl) == -1)
+	if (tcgetattr(0, &term) == -1)
 		return (print_error("ft_select", 3));
-	termios->c_lflag &= ~(ICANON);
-	termios->c_lflag &= ~(ECHO);
-	termios->c_cc[VMIN] = 1;
-	termios->c_cc[VTIME] = 0;
-	if ((ret = tgetstr("vi", NULL)) == NULL)
-		return (print_error("ft_select", 4));
-	tputs(ret, 0, int_putchar);
-	if (tcsetattr(0, TCSADRAIN, termios) == -1)
+	term.c_lflag &= ~(ICANON);
+	term.c_lflag &= ~(ECHO);
+	term.c_cc[VMIN] = 1;
+	term.c_cc[VTIME] = 0;
+	if (do_termcap("vi") == 1)
+		return (1);
+	if (tcsetattr(0, TCSADRAIN, &term) == -1)
 		return (print_error("ft_select", 2));
 	return (0);
 }
