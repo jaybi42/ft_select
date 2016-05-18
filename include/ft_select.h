@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/08 17:56:10 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/18 13:26:15 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/18 15:03:41 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <termios.h>
 # include <term.h>
 # include <curses.h>
+# include <sys/ioctl.h>
 
 # define TERM		struct termios
 
@@ -102,6 +103,7 @@ int					print_select(t_ftl_root *root);
 int					int_putchar(int c);
 int					padding_control(t_ftl_root *root, t_ftl_node *node);
 int					do_termcap(char *key);
+void				print_header(void);
 
 /*
 **Name: List

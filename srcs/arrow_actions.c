@@ -6,12 +6,11 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 14:43:55 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/17 15:10:19 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/18 16:37:32 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
-#include <sys/ioctl.h>
 
 static int	get_newpos(int	pos, int size, int sign)
 {
@@ -19,13 +18,14 @@ static int	get_newpos(int	pos, int size, int sign)
 	int		new_pos;
 
     ioctl(0, TIOCGWINSZ, &win);
+	win.ws_row -= (win.ws_col > 59 ? 11 : 1);
 	if (size <= win.ws_row)
 		return (pos);
-	new_pos = pos + (win.ws_row - 1) * sign;
+	new_pos = pos + win.ws_row * sign;
 	if (new_pos < 0)
-		new_pos = pos + size - (size % (win.ws_row - 1));
+		new_pos = pos + size - size % win.ws_row;
 	else if (new_pos >= size)
-		new_pos = pos - size + (size % (win.ws_row - 1));
+		new_pos = pos - size + size % win.ws_row;
 	if (new_pos >= size || new_pos < 0)
 		return (pos);
 	return (new_pos--);

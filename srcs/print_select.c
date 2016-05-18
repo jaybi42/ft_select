@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 17:50:04 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/18 13:17:52 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/18 16:17:11 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int					print_select(t_ftl_root *root)
 
 	do_termcap("cl");
 	node = (t_ftl_node *)root->next;
+	print_header();
 	while (node != (t_ftl_node *)root)
 	{
 		if (padding_control(root, node) == 1)
