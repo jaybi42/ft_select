@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 17:50:04 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/18 16:17:11 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/18 17:51:22 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static int			error_size(void)
 	ft_putstr_fd("ft_select : TOO SMALL windows size.", 2);
 	return (1);
 }
-
 
 static int			print_selected(char *name, bool cursor)
 {

@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 12:20:51 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/18 13:11:59 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/18 17:48:32 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,5 @@ int				ft_select(char **av, int ac)
 	reset_term();
 	if (ret == 2)
 		give_list(&root);
-	return(0);
+	return (0);
 }

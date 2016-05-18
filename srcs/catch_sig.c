@@ -6,14 +6,12 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 12:59:02 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/18 17:25:12 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/18 17:45:12 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 #include <stdlib.h>
-
-void			is_sig(int signum);
 
 static t_sig	g_sig = {NULL};
 

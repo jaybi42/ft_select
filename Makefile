@@ -6,7 +6,7 @@
 #    By: jguthert <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/30 15:25:02 by jguthert          #+#    #+#              #
-#    Updated: 2016/05/18 15:03:55 by jguthert         ###   ########.fr        #
+#    Updated: 2016/05/18 19:27:09 by jguthert         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -21,62 +21,68 @@ CC = gcc
 CFLAGS = -Wall -Wextra -g3 #-Werror
 
 
-##=-  PATH -=##
+##=-  PATH  -=##
 
-OBJPATH = obj
-SRCPATH = srcs
-LIBFT_PATH = libft
-
-INCLUDE_PATH = include/
 
 ##=-  Rules -=##
 
-LIBFT = -L $(LIBFT_PATH)
-LIBS = $(LIBFT) -lft -lncurses
+LIB := libft/libft.a
+IFLAGS := -I include/ -I libft/includes
+LFLAGS := -L libft/ -lft -lncurses
 
-INCLUDES = -I./ -I $(LIBFT_PATH)/includes -I $(INCLUDE_PATH)
+
+##=-  Colors  -=##
+
+GREEN:="\033[1;32m"
+EOC:="\033[0m"
 
 
 ##=-  Files -=##
 
-OBJ = $(SRC:$(SRCPATH)/%.c=$(OBJPATH)/%.o)
-SRC = $(addprefix $(SRCPATH)/,$(SRCSFILES))
+FILES =					main			\
+						ft_select		\
+						print_error		\
+						init_list		\
+						init_term		\
+						actions			\
+						arrow_actions	\
+						mod_actions		\
+						print_select	\
+						int_putchar		\
+						catch_sig		\
+						do_termcap		\
+						print_header	\
+						padding_control	\
 
-SRCSFILES =				main.c			\
-						ft_select.c		\
-						print_error.c	\
-						init_list.c		\
-						init_term.c		\
-						actions.c		\
-						arrow_actions.c	\
-						mod_actions.c	\
-						print_select.c	\
-						int_putchar.c	\
-						catch_sig.c		\
-						do_termcap.c	\
-						print_header.c	\
-						padding_control.c	\
+
+SRC := $(addprefix srcs/,$(addsuffix .c,$(FILES)))
+OBJ := $(addprefix obj/,$(addsuffix .o,$(FILES)))
+
 
 ##=-  Process -=##
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-#	@echo "\n\033[33mProcessing\n\033[0m"
-	@$(MAKE) -C libft/
-	@$(CC) -o $@ $(CFLAGS) $(OBJ) $(LIBS)
-#	@echo "\n\033[33mEnd of the Process\n\033[0m"
+$(NAME): $(OBJ) $(LIB)
+	@echo $(GREEN) "Compiling $@" $(EOC)
+	@$(CC) $(SRC) $(LFLAGS) $(IFLAGS) $(CFLAGS) -o $(NAME)
 
-$(OBJ): $(OBJPATH)/%.o : $(SRCPATH)/%.c
-	@mkdir -p $(dir $@)
-#	@echo "\033[32m"
-	@$(CC) -o $@ $(CFLAGS) $(INCLUDES) -c $<
-#	@echo "\033[0m"
+$(LIB):
+	@make -C libft
+
+obj/%.o: srcs/%.c
+	@$(CC) $(CFLAGS) $(IFLAGS) -o $@ -c $<
 
 clean:
-	@/bin/rm -rf $(OBJPATH)
+	@echo $(GREEN) "Remove .o  [ft_select]" $(EOC)
+	@make -C ./libft clean
+	@/bin/rm -f $(OBJ)
 
 fclean: clean
-	@/bin/rm -rf $(NAME)
+	@echo $(GREEN) "Remove all [ft_select]" $(EOC)
+	@make -C ./libft fclean
+	@/bin/rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re

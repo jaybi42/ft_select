@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 14:52:22 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/18 12:37:47 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/18 17:49:01 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void			del_action(t_ftl_root *root, t_ftl_node **pos)
 	((t_elem *)*pos)->cursor = 1;
 }
 
-void		sel_action(t_ftl_root *root, t_ftl_node **pos)
+void			sel_action(t_ftl_root *root, t_ftl_node **pos)
 {
 	((t_elem *)*pos)->selected = !(((t_elem *)*pos)->selected);
 	if ((((t_elem *)*pos)->selected) == 1)

@@ -6,18 +6,18 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 14:43:55 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/18 16:37:32 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/18 17:50:03 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-static int	get_newpos(int	pos, int size, int sign)
+static int			get_newpos(int pos, int size, int sign)
 {
-    struct winsize  win;
-	int		new_pos;
+	struct winsize	win;
+	int				new_pos;
 
-    ioctl(0, TIOCGWINSZ, &win);
+	ioctl(0, TIOCGWINSZ, &win);
 	win.ws_row -= (win.ws_col > 59 ? 11 : 1);
 	if (size <= win.ws_row)
 		return (pos);
@@ -31,7 +31,7 @@ static int	get_newpos(int	pos, int size, int sign)
 	return (new_pos--);
 }
 
-void		up_action(t_ftl_root *root, t_ftl_node **pos)
+void				up_action(t_ftl_root *root, t_ftl_node **pos)
 {
 	((t_elem *)*pos)->cursor = 0;
 	*pos = (*pos)->prev;
@@ -40,7 +40,7 @@ void		up_action(t_ftl_root *root, t_ftl_node **pos)
 	((t_elem *)*pos)->cursor = 1;
 }
 
-void		down_action(t_ftl_root *root, t_ftl_node **pos)
+void				down_action(t_ftl_root *root, t_ftl_node **pos)
 {
 	((t_elem *)*pos)->cursor = 0;
 	*pos = (*pos)->next;
@@ -49,7 +49,7 @@ void		down_action(t_ftl_root *root, t_ftl_node **pos)
 	((t_elem *)*pos)->cursor = 1;
 }
 
-void		right_action(t_ftl_root *root, t_ftl_node **pos)
+void				right_action(t_ftl_root *root, t_ftl_node **pos)
 {
 	int		new_pos;
 
@@ -65,7 +65,7 @@ void		right_action(t_ftl_root *root, t_ftl_node **pos)
 	((t_elem *)*pos)->cursor = 1;
 }
 
-void		left_action(t_ftl_root *root, t_ftl_node **pos)
+void				left_action(t_ftl_root *root, t_ftl_node **pos)
 {
 	int		new_pos;
 

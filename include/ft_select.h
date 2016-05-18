@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/08 17:56:10 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/18 15:03:41 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/18 18:54:01 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 /*
 ** TODO: Suppr stdio
 */
-
-# include <stdio.h> //
 
 # include "libft.h"
 # include <termios.h>
@@ -46,11 +44,11 @@ typedef struct		s_elem
 	bool			cursor;
 }					t_elem;
 
-typedef void		(*modl_t) (t_ftl_root *root, t_ftl_node **pos);
+typedef void		(*t_modl) (t_ftl_root *root, t_ftl_node **pos);
 
 typedef struct		s_actions
 {
-	modl_t			action;
+	t_modl			action;
 	int				value[4];
 	char			*key;
 }					t_actions;
@@ -103,6 +101,7 @@ int					print_select(t_ftl_root *root);
 int					int_putchar(int c);
 int					padding_control(t_ftl_root *root, t_ftl_node *node);
 int					do_termcap(char *key);
+int					move_termcap(char *key, int col, int row);
 void				print_header(void);
 
 /*
@@ -128,5 +127,6 @@ int					print_error(char *cmd, int error);
 */
 
 void				catch_sig(t_ftl_root *root);
+void				is_sig(int signum);
 
 #endif
