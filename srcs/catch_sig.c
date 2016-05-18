@@ -6,39 +6,63 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 12:59:02 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/18 13:23:06 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/18 17:25:12 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 #include <stdlib.h>
 
+void			is_sig(int signum);
+
 static t_sig	g_sig = {NULL};
 
-static void		is_sig(int signum)
+static void		signal_cont(void)
+{
+	init_term();
+	signal(SIGTSTP, is_sig);
+	print_select(g_sig.root);
+}
+
+static void		signal_tstp(void)
+{
+	TERM		term;
+	char		sig[2];
+
+	do_termcap("cl");
+	do_termcap("ve");
+	tcgetattr(0, &term);
+	tcsetattr(0, 0, &term);
+	sig[0] = term.c_cc[VSUSP];
+	sig[1] = 0;
+	ioctl(0, TIOCSTI, sig);
+	signal(SIGTSTP, SIG_DFL);
+}
+
+void			is_sig(int signum)
 {
 	if (signum == SIGWINCH)
 		print_select(g_sig.root);
 	else if (signum == SIGINT)
 	{
-		do_termcap("cl");
 		reset_term();
 		exit(0);
 	}
+	else if (signum == SIGTSTP)
+		signal_tstp();
 	else if (signum == SIGCONT)
-	{
-		init_term();
-		print_select(g_sig.root);
-		ft_putendl_fd("test", 2);
-		ft_putendl_fd("test", 1);
-	}
+		signal_cont();
 }
 
 void			catch_sig(t_ftl_root *root)
 {
+	int		i;
+
+	i = 1;
 	g_sig.root = root;
-	signal(SIGWINCH, is_sig);
-	signal(SIGINT, is_sig);
-	signal(SIGCONT, is_sig);
-	signal(SIGSTOP, SIG_IGN);
+	while (i < 32)
+	{
+		signal(i, is_sig);
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/03 15:33:47 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/11 18:07:43 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/18 17:33:46 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void		how_to_use(void)
 {
-	ft_putendl("Put something NOOB !");
+	ft_putendl_fd("Put something NOOB !", 2);
 	return ;
 }
 
