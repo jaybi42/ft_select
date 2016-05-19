@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 12:59:02 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/18 17:45:12 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/19 14:58:01 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ void			is_sig(int signum)
 {
 	if (signum == SIGWINCH)
 		print_select(g_sig.root);
-	else if (signum == SIGINT)
-	{
-		reset_term();
-		exit(0);
-	}
 	else if (signum == SIGTSTP)
 		signal_tstp();
 	else if (signum == SIGCONT)
 		signal_cont();
+	else
+	{
+		reset_term();
+		exit(signum);
+	}
 }
 
 void			catch_sig(t_ftl_root *root)
