@@ -6,7 +6,7 @@
 /*   By: jguthert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/13 14:10:31 by jguthert          #+#    #+#             */
-/*   Updated: 2016/05/11 16:10:30 by jguthert         ###   ########.fr       */
+/*   Updated: 2016/05/31 16:51:02 by jguthert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,13 +181,15 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
 t_ftl_root			ftl_uninit(void);
 void				ftl_init(t_ftl_root *l, size_t size);
-int					ftl_insert_pos(t_ftl_root *l, FTL_NODE *pos, FTL_NODEC *nod);
+int					ftl_insert_pos(t_ftl_root *l,
+									FTL_NODE *pos, FTL_NODEC *nod);
 int					ftl_push_front(t_ftl_root *l, FTL_NODEC *node);
 int					ftl_push_back(t_ftl_root *l, FTL_NODEC *node);
 void				ftl_release(t_ftl_root *l, void (*delalloc)());
 void				ftl_pop_back(t_ftl_root *l, void (*delalloc)());
 void				ftl_pop_front(t_ftl_root *l, void (*delalloc)());
-void				ftl_erase_pos(t_ftl_root *l, t_ftl_node *pos, void (*delalloc)());
+void				ftl_erase_pos(t_ftl_root *l,
+									t_ftl_node *pos, void (*delalloc)());
 
 /*
 **	##=-  Math  -=##
